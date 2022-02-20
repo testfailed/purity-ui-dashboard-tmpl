@@ -28,22 +28,22 @@ export default function Dashboard(props) {
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
-    for (let i = 0; i < routes.length; i++) {
-      if (routes[i].collapse) {
-        let collapseActiveRoute = getActiveRoute(routes[i].views);
+    for (let route of routes) {
+      if (route.collapse) {
+        let collapseActiveRoute = getActiveRoute(route.views);
         if (collapseActiveRoute !== activeRoute) {
           return collapseActiveRoute;
         }
-      } else if (routes[i].category) {
-        let categoryActiveRoute = getActiveRoute(routes[i].views);
+      } else if (route.category) {
+        let categoryActiveRoute = getActiveRoute(route.views);
         if (categoryActiveRoute !== activeRoute) {
           return categoryActiveRoute;
         }
       } else {
         if (
-          window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
+          window.location.href.indexOf(route.layout + route.path) !== -1
         ) {
-          return routes[i].name;
+          return route.name;
         }
       }
     }
@@ -52,18 +52,18 @@ export default function Dashboard(props) {
   // This changes navbar state(fixed or not)
   const getActiveNavbar = (routes) => {
     let activeNavbar = false;
-    for (let i = 0; i < routes.length; i++) {
-      if (routes[i].category) {
-        let categoryActiveNavbar = getActiveNavbar(routes[i].views);
+    for (let route of routes) {
+      if (route.category) {
+        let categoryActiveNavbar = getActiveNavbar(route.views);
         if (categoryActiveNavbar !== activeNavbar) {
           return categoryActiveNavbar;
         }
       } else {
         if (
-          window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
+          window.location.href.indexOf(route.layout + route.path) !== -1
         ) {
-          if (routes[i].secondaryNavbar) {
-            return routes[i].secondaryNavbar;
+          if (route.secondaryNavbar) {
+            return route.secondaryNavbar;
           }
         }
       }
@@ -81,9 +81,9 @@ export default function Dashboard(props) {
       if (prop.layout === "/admin") {
         return (
           <Route
+            key={key}
             path={prop.layout + prop.path}
             component={prop.component}
-            key={key}
           />
         );
       } else {

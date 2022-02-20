@@ -14,9 +14,10 @@ import React from "react";
 function DashboardTableRow(props) {
   const { logo, name, members, budget, progression } = props;
   const textColor = useColorModeValue("gray.700", "white");
+
   return (
     <Tr>
-      <Td minWidth={{ sm: "250px" }} pl="0px">
+      <Td key={name} minWidth={{ sm: "250px" }} pl="0px">
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           <Icon as={logo} h={"24px"} w={"24px"} pe="5px" />
           <Text
@@ -30,11 +31,12 @@ function DashboardTableRow(props) {
         </Flex>
       </Td>
 
-      <Td>
+      <Td key={members}>
         <AvatarGroup size="sm">
           {members.map((member) => {
             return (
               <Avatar
+                key={member}
                 name="Ryan Florence"
                 src={member}
                 _hover={{ zIndex: "3", cursor: "pointer" }}
@@ -48,7 +50,7 @@ function DashboardTableRow(props) {
           {budget}
         </Text>
       </Td>
-      <Td>
+      <Td key={progression}>
         <Flex direction="column">
           <Text
             fontSize="md"

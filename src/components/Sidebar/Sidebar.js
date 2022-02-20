@@ -27,25 +27,31 @@ import { NavLink, useLocation } from "react-router-dom";
 // FUNCTIONS
 
 function Sidebar(props) {
+
   // to check for active links and opened collapses
   let location = useLocation();
+
   // this is for the rest of the collapses
   const [state, setState] = React.useState({});
   const mainPanel = React.useRef();
   let variantChange = "0.2s linear";
+
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     return location.pathname === routeName ? "active" : "";
   };
+
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createLinks = (routes) => {
     const { sidebarVariant } = props;
+
     // Chakra Color Mode
     let activeBg = useColorModeValue("white", "gray.700");
     let inactiveBg = useColorModeValue("white", "gray.700");
     let activeColor = useColorModeValue("gray.700", "white");
     let inactiveColor = useColorModeValue("gray.400", "gray.400");
     let sidebarActiveShadow = "0px 7px 11px rgba(0, 0, 0, 0.04)";
+
     // Here are all the props that may change depending on sidebar's state.(Opaque or transparent)
     if (sidebarVariant === "opaque") {
       activeBg = "transparent";
@@ -63,30 +69,23 @@ function Sidebar(props) {
         var st = {};
         st[prop["state"]] = !state[prop.state];
         return (
-          <>
+          <React.Fragment key={key}>
             <Text
               color={activeColor}
               fontWeight="bold"
-              mb={{
-                xl: "12px",
-              }}
+              mb={{ xl: "12px" }}
               mx="auto"
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
+              ps={{ sm: "10px", xl: "16px" }}
               py="12px"
             >
-              {document.documentElement.dir === "rtl"
-                ? prop.rtlName
-                : prop.name}
+              {document.documentElement.dir === "rtl" ? prop.rtlName : prop.name}
             </Text>
             {createLinks(prop.views)}
-          </>
+          </React.Fragment>
         );
       }
       return (
-        <NavLink to={prop.layout + prop.path}>
+        <NavLink key={key} to={prop.layout + prop.path}>
           {activeRoute(prop.layout + prop.path) === "active" ? (
             <Button
               boxSize="initial"
@@ -95,16 +94,9 @@ function Sidebar(props) {
               boxShadow={sidebarActiveShadow}
               bg={activeBg}
               transition={variantChange}
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
+              mb={{ xl: "12px" }}
+              mx={{ xl: "auto" }}
+              ps={{ sm: "10px", xl: "16px" }}
               py="12px"
               borderRadius="15px"
               _hover="none"
@@ -114,9 +106,7 @@ function Sidebar(props) {
                 transform: "none",
                 borderColor: "transparent",
               }}
-              _focus={{
-                boxShadow: "0px 7px 11px rgba(0, 0, 0, 0.04)",
-              }}
+              _focus={{ boxShadow: "0px 7px 11px rgba(0, 0, 0, 0.04)" }}
             >
               <Flex>
                 {typeof prop.icon === "string" ? (
@@ -146,17 +136,10 @@ function Sidebar(props) {
               justifyContent="flex-start"
               alignItems="center"
               bg="transparent"
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
+              mb={{ xl: "12px" }}
+              mx={{ xl: "auto" }}
               py="12px"
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
+              ps={{ sm: "10px", xl: "16px" }}
               borderRadius="15px"
               _hover="none"
               w="100%"
@@ -165,9 +148,7 @@ function Sidebar(props) {
                 transform: "none",
                 borderColor: "transparent",
               }}
-              _focus={{
-                boxShadow: "none",
-              }}
+              _focus={{ boxShadow: "none" }}
             >
               <Flex>
                 {typeof prop.icon === "string" ? (
@@ -185,9 +166,7 @@ function Sidebar(props) {
                   </IconBox>
                 )}
                 <Text color={inactiveColor} my="auto" fontSize="sm">
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
+                  {document.documentElement.dir === "rtl" ? prop.rtlName : prop.name}
                 </Text>
               </Flex>
             </Button>
@@ -241,12 +220,8 @@ function Sidebar(props) {
           transition={variantChange}
           w="260px"
           maxW="260px"
-          ms={{
-            sm: "16px",
-          }}
-          my={{
-            sm: "16px",
-          }}
+          ms={{ sm: "16px" }}
+          my={{ sm: "16px" }}
           h="calc(100vh - 32px)"
           ps="20px"
           pe="20px"
@@ -267,15 +242,17 @@ function Sidebar(props) {
 // FUNCTIONS
 
 export function SidebarResponsive(props) {
+
   // to check for active links and opened collapses
   let location = useLocation();
+
   // this is for the rest of the collapses
   const [state, setState] = React.useState({});
   const mainPanel = React.useRef();
+
   // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) => {
-    return location.pathname === routeName ? "active" : "";
-  };
+  const activeRoute = (routeName) => location.pathname === routeName ? "active" : "";
+
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createLinks = (routes) => {
     // Chakra Color Mode
@@ -292,46 +269,32 @@ export function SidebarResponsive(props) {
         var st = {};
         st[prop["state"]] = !state[prop.state];
         return (
-          <>
+          <React.Fragment key={key}>
             <Text
               color={activeColor}
               fontWeight="bold"
-              mb={{
-                xl: "12px",
-              }}
+              mb={{ xl: "12px" }}
               mx="auto"
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
+              ps={{ sm: "10px", xl: "16px", }}
               py="12px"
             >
-              {document.documentElement.dir === "rtl"
-                ? prop.rtlName
-                : prop.name}
+              {document.documentElement.dir === "rtl" ? prop.rtlName : prop.name}
             </Text>
             {createLinks(prop.views)}
-          </>
+          </React.Fragment>
         );
       }
       return (
-        <NavLink to={prop.layout + prop.path}>
+        <NavLink key={key} to={prop.layout + prop.path}>
           {activeRoute(prop.layout + prop.path) === "active" ? (
             <Button
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
               bg={activeBg}
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
+              mb={{ xl: "12px" }}
+              mx={{ xl: "auto" }}
+              ps={{ sm: "10px", xl: "16px" }}
               py="12px"
               borderRadius="15px"
               _hover="none"
@@ -341,9 +304,7 @@ export function SidebarResponsive(props) {
                 transform: "none",
                 borderColor: "transparent",
               }}
-              _focus={{
-                boxShadow: "none",
-              }}
+              _focus={{ boxShadow: "none" }}
             >
               <Flex>
                 {typeof prop.icon === "string" ? (
@@ -360,9 +321,7 @@ export function SidebarResponsive(props) {
                   </IconBox>
                 )}
                 <Text color={activeColor} my="auto" fontSize="sm">
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
+                  {document.documentElement.dir === "rtl" ? prop.rtlName : prop.name}
                 </Text>
               </Flex>
             </Button>
@@ -372,17 +331,10 @@ export function SidebarResponsive(props) {
               justifyContent="flex-start"
               alignItems="center"
               bg="transparent"
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
+              mb={{ xl: "12px" }}
+              mx={{ xl: "auto" }}
               py="12px"
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
+              ps={{ sm: "10px", xl: "16px" }}
               borderRadius="15px"
               _hover="none"
               w="100%"
@@ -391,9 +343,7 @@ export function SidebarResponsive(props) {
                 transform: "none",
                 borderColor: "transparent",
               }}
-              _focus={{
-                boxShadow: "none",
-              }}
+              _focus={{ boxShadow: "none" }}
             >
               <Flex>
                 {typeof prop.icon === "string" ? (
@@ -410,9 +360,7 @@ export function SidebarResponsive(props) {
                   </IconBox>
                 )}
                 <Text color={inactiveColor} my="auto" fontSize="sm">
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
+                  {document.documentElement.dir === "rtl" ? prop.rtlName : prop.name}
                 </Text>
               </Flex>
             </Button>
@@ -456,6 +404,7 @@ export function SidebarResponsive(props) {
   // SIDEBAR
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+
   // Color variables
   return (
     <Flex
@@ -468,7 +417,8 @@ export function SidebarResponsive(props) {
         w="18px"
         h="18px"
         ref={btnRef}
-        colorScheme="teal"
+        // TODO: cause chrome error log
+        // colorScheme="teal"
         onClick={onOpen}
       />
       <Drawer
@@ -481,12 +431,8 @@ export function SidebarResponsive(props) {
         <DrawerContent
           w="250px"
           maxW="250px"
-          ms={{
-            sm: "16px",
-          }}
-          my={{
-            sm: "16px",
-          }}
+          ms={{ sm: "16px" }}
+          my={{ sm: "16px" }}
           borderRadius="16px"
         >
           <DrawerCloseButton
@@ -514,6 +460,7 @@ Sidebar.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object),
   variant: PropTypes.string,
 };
+
 SidebarResponsive.propTypes = {
   logoText: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object),
